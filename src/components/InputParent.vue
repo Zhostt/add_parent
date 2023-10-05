@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <div class="input-block">
+  <div class="input-container">
+    <h4>Персональные данные</h4>
+    <div class="input-block parent-form-block">
       <label for="name">
-        Имя
+        <div class="input-label">Имя</div>
         <input
           type="text"
-          placeholder="Имя"
           name="name"
           required
           v-model="parentInputs.name"
@@ -13,12 +13,11 @@
         />
       </label>
     </div>
-    <div class="input-block">
+    <div class="input-block parent-form-block">
       <label for="age">
-        Возраст
+        <div class="input-label">Возраст</div>
         <input
           type="number"
-          placeholder="Возраст"
           name="age"
           required
           v-model="parentInputs.age"
@@ -48,4 +47,8 @@ const parentInputs = computed({
 
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.parent-form-block{
+  width: 100%;
+}
+</style>

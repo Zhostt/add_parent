@@ -1,11 +1,8 @@
 <template>
   <form class="form-container" @submit.prevent="submitHandler">
-    <div class="parent-input">
-      <h4>Персональные данные</h4>
-      <InputParent v-model="parentInputs"/>
-    </div>
+    <InputParent v-model="parentInputs"/>
     <InputChildren  v-model="childrenInputs"/>
-    <input type="submit" value="Добавить" />
+    <input class="btn btn-submit" type="submit" value="Сохранить" />
   </form>
 </template>
 
@@ -45,4 +42,58 @@ const submitHandler = () => {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.input-block{
+  width: 100%;
+  border: 1px solid rgb(230, 226, 226);
+  border-radius: 1em;
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+input{
+  height: 3em;
+  margin: 0.5em;
+  padding: 1em;
+  border: 1px solid rgb(230, 226, 226);
+  border-radius: 5px;
+}
+
+.input-block {
+  display: flex;
+  align-items: left;
+}
+
+.input-label{
+  color: grey;
+  text-align: start;
+  margin: 0.5em 0.5em;
+}
+
+.btn{
+  height: 100%;
+  border: 1px solid #01A7FD;
+  border-radius: 1.5em;
+  background-color: #01A7FD;
+  color: white;
+}
+
+.btn-submit{
+  background-color: 0;
+  width: 20%
+}
+</style>

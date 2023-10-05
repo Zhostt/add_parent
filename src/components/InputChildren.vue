@@ -1,22 +1,30 @@
 <template>
-  <div>
-    <button
-      type="button"
-      :class="{ btn: true, inactive: addFormInactive }"
-      @click="addForm"
-    >
-      +
-    </button>
-    <div class="child-form-block" v-for="input in childrenInputs" :key="input.id">
+  <div class="input-container">
+    <div class="children-header">
+      <h4>Дети (макс.5)</h4>
+      <button
+        type="button"
+        :class="{ btn: true, 'btn-primary':true, 'btn-add-child': true, inactive: addFormInactive }"
+        @click="addForm"
+      >
+        + Добавить ребенка
+      </button>
+    </div>
+
+    <div class="child-form-block input-block" v-for="input in childrenInputs" :key="input.id">
       <label for="name">
-        Имя
+        <div class="input-label">Имя</div>
         <input type="text" name="name" required v-model="input.name" autocomplete="off">
       </label>
       <label for="children">
-        Возраст
+        <div class="input-label">Возраст</div>
         <input type="number" name="children" required v-model="input.age" autocomplete="off">
       </label>
-      <button class="btn delete-form-btn" @click="handleDelete(input.id)">Удалить</button>
+      <button
+        class="btn btn-danger delete-form-btn"
+        @click="handleDelete(input.id)">
+        Удалить
+      </button>
     </div>
   </div>
 </template>
@@ -66,16 +74,32 @@ const handleDelete = (id: number) => {
   childrenInputs.value = childrenInputs.value.filter((input:Child) => input.id !== id);
   addFormInactive.value = false;
 };
-
 </script>
 
-  <style scoped>
-  .inactive {
-    background-color: grey;
-  }
-  .child-form-block {
-    display: flex;
-    border: 1px solid green;
-    justify-content: center;
-  }
-  </style>
+<style scoped>
+
+.inactive {
+  background-color: grey;
+}
+.child-form-block{
+  display: flex;
+  align-items: center;
+}
+.children-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 3em;
+  align-items: center;
+}
+
+.btn-add-child{
+  width: 35%;
+}
+
+.delete-form-btn{
+  margin: 0.5em;
+  height: 3em;
+  align-self: flex-end;
+}
+</style>
