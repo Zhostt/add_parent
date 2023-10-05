@@ -1,27 +1,35 @@
 <template>
   <form class="form-container" @submit.prevent="submitHandler">
     <InputParent />
-    <InputChildren  />
+    <InputChildren  @children-change="childrenInputHandler"/>
     <input type="submit" value="Добавить" />
   </form>
 </template>
 
 <script setup>
-import ref from 'vue';
+import { ref } from 'vue';
 import InputParent from "./InputParent.vue";
 import InputChildren from "./InputChildren.vue";
 import useFamilyStore from "../store/FamilyStore";
 
-// inner form state
-// РЕШИ ЗДЕСЬ КАК ЛУЧШЕ УПРАВЛЯТЬСЯ С СОСТОЯНИЕМ,
-// МБ В-МОДЕЛЬ от общего состояния (отдельные состояни форм в общем сторе).
-// Либо передача в-модел как пропса https://vuejs.org/guide/components/v-model.html#v-model-arguments
-// Просто сабмит дефолтный в котороый прилетает ивент, и в ивенте найти?
-
-// working with main state - submit
+// Состояние форм - дочерних компонентов
+let childrenState = [];
+const parentState = {};
+// Получаем из события children-input новое значение, присваиваем состоянию выше
+const childrenInputHandler = (newVal) => {
+  console.log('children-input', newVal);
+  childrenState = newVal;
+};
+//  аналогично
+const parentInputHandler = () => {
+  console.log('parent-input');
+};
+// обработка сабмита обеих форм, работа с store
 const familyStore = useFamilyStore();
 const submitHandler = () => {
-  console.log('submitted');
+  familyStore.addFamily(parentState, childrenState);
+  console.log('parents', familyStore.getParents);
+  console.log('children', familyStore.getChildren);
 };
 
 </script>

@@ -9,7 +9,7 @@ export type Parent = {
 export type Child = {
     name: string,
     age: number,
-    parentId: number,
+    parentId: number | undefined,
     id: number,
 }
 
@@ -25,8 +25,9 @@ const useFamilyStore = defineStore({
     getChildren: (state) => state.children,
   },
   actions: {
-    addFamily(parent: Parent, children: object[] = []) {
+    addFamily(parent: Parent, children: Child[] = []) {
       // Ниже к данным формы мы добавляем необходимые id и пушим в основной хранилище
+      console.log('adding', parent, children);
       const parentId = Date.now();
       const readyParent = { ...parent, id: parentId };
       const readyChildren = children.map((child) => ({ ...child, parentId }));

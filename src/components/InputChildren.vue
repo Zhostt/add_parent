@@ -22,7 +22,7 @@
   </template>
 
 <script lang='ts' setup>
-import { ref } from 'vue';
+import { ref, watch, defineEmits } from 'vue';
 
 interface Input {
   name: string;
@@ -30,10 +30,12 @@ interface Input {
   id: number;
   parentId: number | undefined;
 }
-
+// Состояние - массив данных с форм + статус кнопки добавления формы
 const formInputs = ref<Input[]>([]);
-const addFormInactive = ref(false);
+const addFormInactive = ref<boolean>(false);
 
+// Обработка добавления формы. Пушим в массив объект формы, увязанной с темплейтом
+// Останавливаем добавление новых форм на 5
 const addForm = () => {
   if (formInputs.value.length < 5) {
     const id = Date.now();
@@ -43,13 +45,19 @@ const addForm = () => {
     formInputs.value.push(newInput);
   } else {
     addFormInactive.value = true;
-    console.log(formInputs.value);
   }
 };
 
+// Обработка удаления формы через id
 const handleDelete = (id: number) => {
   formInputs.value = formInputs.value.filter((input) => input.id !== id);
 };
+// Эмит на вочере за состоянием форм
+// для отправки данных в родительский компонент при любом изменении
+const emits = defineEmits(['children-change']);
+watch(formInputs.value, (newVal) => {
+  emits('children-change', newVal);
+});
 
 </script>
 
