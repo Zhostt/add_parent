@@ -14,7 +14,7 @@
         </label>
         <label for="children">
           Возраст
-          <input type="text" name="children" required v-model="input.age" autocomplete="off">
+          <input type="number" name="children" required v-model="input.age" autocomplete="off">
         </label>
         <button class="btn delete-form-btn" @click="handleDelete(input.id)">Удалить</button>
       </div>
