@@ -8,7 +8,7 @@
           placeholder="Имя"
           name="name"
           required
-          v-model="value.name"
+          v-model="parentInputs.name"
           autocomplete="off"
         />
       </label>
@@ -21,7 +21,7 @@
           placeholder="Возраст"
           name="age"
           required
-          v-model="value.age"
+          v-model="parentInputs.age"
           autocomplete="off"
         />
       </label>
@@ -32,10 +32,12 @@
 <script lang='ts' setup>
 import { computed, defineEmits, defineProps } from 'vue';
 
+// Аналогично детским инпутам, это прием v-model с объектом,
+// Позволяющий динамично с ним обращаться, хоть он и в род. компоненте
 const props = defineProps(['modelValue']);
 const emit = defineEmits(['update:modelValue']);
 
-const value = computed({
+const parentInputs = computed({
   get() {
     return props.modelValue;
   },

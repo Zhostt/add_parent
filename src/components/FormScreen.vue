@@ -1,7 +1,7 @@
 <template>
   <form class="form-container" @submit.prevent="submitHandler">
     <InputParent v-model="parentInputs"/>
-    <InputChildren  @children-change="childrenInputHandler"/>
+    <InputChildren  v-model="childrenInputs"/>
     <input type="submit" value="Добавить" />
   </form>
 </template>
@@ -10,28 +10,33 @@
 import { ref } from 'vue';
 import InputParent from "./InputParent.vue";
 import InputChildren from "./InputChildren.vue";
-import useFamilyStore from "../store/FamilyStore";
+import useFamilyStore, { Parent, Child } from "../store/FamilyStore";
 
 // Состояние форм - дочерних компонентов
-let childrenState = [];
-const parentInputs = ref({
+// Пустой массив детей
+// Объект родителя с заранее заданным id
+const childrenInputs = ref<Child[]>([]);
+const parentInputs = ref<Parent>({
   name: '' as string,
   age: null as number | null,
+  id: Date.now(),
 });
-// Получаем из события children-input новое значение, присваиваем состоянию выше
-// это отслеживани е изменений в инпутах
-const childrenInputHandler = (newVal) => {
-  childrenState = newVal;
-};
 
 // обработка сабмита обеих форм, работа с store
+// Присваивание родительского ИД детям
+// очистка форм
 const familyStore = useFamilyStore();
-const submitHandler = (e) => {
-  familyStore.addFamily(parentInputs.value, childrenState);
+const submitHandler = () => {
+  const parent = { ...parentInputs.value };
+  const children = [...childrenInputs.value]
+    .map((child) => ({ ...child, parentId: parent.id }));
+  familyStore.addFamily(parent, children);
   parentInputs.value = {
     name: '',
     age: null,
+    id: Date.now(),
   };
+  childrenInputs.value = [];
   console.log('parents', familyStore.getParents);
   console.log('children', familyStore.getChildren);
 };

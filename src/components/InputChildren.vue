@@ -22,7 +22,10 @@
   </template>
 
 <script lang='ts' setup>
-import { ref, watch, defineEmits } from 'vue';
+
+import {
+  computed, defineEmits, defineProps, ref,
+} from 'vue';
 
 interface Input {
   name: string;
@@ -30,8 +33,21 @@ interface Input {
   id: number;
   parentId: number | undefined;
 }
-// Состояние - массив данных с форм + статус кнопки добавления формы
-const childrenInputs = ref<Input[]>([]);
+
+// Пляски ниже для того, чтобы увязать пропс v-model с не-примитивом
+const props = defineProps(['modelValue']);
+const emit = defineEmits(['update:modelValue']);
+
+const childrenInputs = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(val) {
+    emit('update:modelValue', val);
+  },
+});
+
+// Состояние кнопки добавления формы
 const addFormInactive = ref<boolean>(false);
 
 // Обработка добавления формы. Пушим в массив объект формы, увязанной с темплейтом
@@ -50,14 +66,8 @@ const addForm = () => {
 
 // Обработка удаления формы через id
 const handleDelete = (id: number) => {
-  childrenInputs.value = childrenInputs.value.filter((input) => input.id !== id);
+  childrenInputs.value = childrenInputs.value.filter((input:Input) => input.id !== id);
 };
-// Эмит на вочере за состоянием форм
-// для отправки данных в родительский компонент при любом изменении
-const emits = defineEmits(['children-change']);
-watch(childrenInputs.value, (newVal) => {
-  emits('children-change', newVal);
-});
 
 </script>
 
