@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import MainScreen from './components/MainScreen.vue';
+import MainScreen from "./components/MainScreen.vue";
 </script>
 
 <style>
@@ -15,5 +15,4 @@ import MainScreen from './components/MainScreen.vue';
   color: #2c3e50;
   margin-top: 60px;
 }
-
 </style>

@@ -25,9 +25,13 @@ const useFamilyStore = defineStore({
     getChildren: (state) => state.children,
   },
   actions: {
-    addFamily(parent: Parent, children: Child[]) {
-      this.parents.push(parent);
-      this.children.push(...children);
+    addFamily(parent: Parent, children: object[] = []) {
+      // Ниже к данным формы мы добавляем необходимые id и пушим в основной хранилище
+      const parentId = Date.now();
+      const readyParent = { ...parent, id: parentId };
+      const readyChildren = children.map((child) => ({ ...child, parentId }));
+      this.parents.push(readyParent);
+      this.children.push(...readyChildren as Child[]);
     },
     setPreviewState(previewState: boolean) {
       this.preview = previewState;

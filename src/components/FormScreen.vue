@@ -1,37 +1,29 @@
 <template>
-  <form class="form-container" @submit.prevent="submitHandler(formsState)">
-    <InputParent @parent-change="updateParent" />
-    <InputChildren @children-change="updateChildren" />
+  <form class="form-container" @submit.prevent="submitHandler">
+    <InputParent />
+    <InputChildren  />
     <input type="submit" value="Добавить" />
   </form>
 </template>
 
 <script setup>
+import ref from 'vue';
 import InputParent from "./InputParent.vue";
 import InputChildren from "./InputChildren.vue";
 import useFamilyStore from "../store/FamilyStore";
 
 // inner form state
-const formsState = {
-  parent: {},
-  children: [],
-};
-// recieving data from forms
-const updateParent = (parent) => {
-  formsState.parent = { ...parent };
-  console.log("parent updated", formsState.parent);
-};
-const updateChildren = (children) => {
-  formsState.children = [...children];
-};
+// РЕШИ ЗДЕСЬ КАК ЛУЧШЕ УПРАВЛЯТЬСЯ С СОСТОЯНИЕМ,
+// МБ В-МОДЕЛЬ от общего состояния (отдельные состояни форм в общем сторе).
+// Либо передача в-модел как пропса https://vuejs.org/guide/components/v-model.html#v-model-arguments
+// Просто сабмит дефолтный в котороый прилетает ивент, и в ивенте найти?
 
 // working with main state - submit
 const familyStore = useFamilyStore();
-const submitHandler = (formState) => {
-  const { parent, children } = formState;
-  familyStore.addFamily(parent, children);
-  console.log("Parents", familyStore.getParents);
+const submitHandler = () => {
+  console.log('submitted');
 };
+
 </script>
 
 <style lang="scss" scoped></style>
