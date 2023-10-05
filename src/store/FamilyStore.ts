@@ -8,7 +8,7 @@ export type Parent = {
 
 export type Child = {
     name: string,
-    age: number,
+    age: number | null,
     parentId: number | undefined,
     id: number,
 }

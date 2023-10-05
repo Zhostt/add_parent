@@ -26,13 +26,7 @@
 import {
   computed, defineEmits, defineProps, ref,
 } from 'vue';
-
-interface Input {
-  name: string;
-  age: number | null;
-  id: number;
-  parentId: number | undefined;
-}
+import { Child } from "../store/FamilyStore";
 
 // Пляски ниже для того, чтобы увязать пропс v-model с не-примитивом
 const props = defineProps(['modelValue']);
@@ -51,22 +45,26 @@ const childrenInputs = computed({
 const addFormInactive = ref<boolean>(false);
 
 // Обработка добавления формы. Пушим в массив объект формы, увязанной с темплейтом
-// Останавливаем добавление новых форм на 5
+// Останавливаем добавление новых форм на 5, переключаем кнопку
 const addForm = () => {
   if (childrenInputs.value.length < 5) {
     const id = Date.now();
-    const newInput: Input = {
+    const newInput: Child = {
       name: '', age: null, id, parentId: undefined,
     };
     childrenInputs.value.push(newInput);
+    if (childrenInputs.value.length === 5) {
+      addFormInactive.value = true;
+    }
   } else {
     addFormInactive.value = true;
   }
 };
 
-// Обработка удаления формы через id
+// Обработка удаления формы через id + включаем обратно кнопку
 const handleDelete = (id: number) => {
-  childrenInputs.value = childrenInputs.value.filter((input:Input) => input.id !== id);
+  childrenInputs.value = childrenInputs.value.filter((input:Child) => input.id !== id);
+  addFormInactive.value = false;
 };
 
 </script>
