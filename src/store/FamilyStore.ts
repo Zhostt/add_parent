@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 export type Parent = {
     name: string,
-    age: number,
+    age: number | null,
     id: number,
 }
 

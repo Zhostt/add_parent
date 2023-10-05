@@ -8,7 +8,7 @@
           placeholder="Имя"
           name="name"
           required
-          v-model = "parentInputs.name"
+          v-model="value.name"
           autocomplete="off"
         />
       </label>
@@ -21,7 +21,7 @@
           placeholder="Возраст"
           name="age"
           required
-          v-model = "parentInputs.age"
+          v-model="value.age"
           autocomplete="off"
         />
       </label>
@@ -30,19 +30,20 @@
 </template>
 
 <script lang='ts' setup>
-import { ref, watch, defineEmits } from 'vue';
+import { computed, defineEmits, defineProps } from 'vue';
 
-const parentInputs = ref({
-  name: '' as string,
-  age: null as number | null,
+const props = defineProps(['modelValue']);
+const emit = defineEmits(['update:modelValue']);
+
+const value = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(val) {
+    emit('update:modelValue', val);
+  },
 });
-// Эмит на вочере за состоянием форм
-// для отправки данных в родительский компонент при любом изменении
-const emits = defineEmits(['parent-change']);
-watch(parentInputs.value, (newVal) => {
-  emits('parent-change', newVal);
-  parentInputs.value = newVal;
-});
+
 </script>
 
 <style lang="scss" scoped></style>
