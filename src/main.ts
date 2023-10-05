@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import bootstrap from 'bootstrap';
 import App from './App.vue';
 
 const pinia = createPinia();

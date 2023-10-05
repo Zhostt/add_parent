@@ -1,6 +1,9 @@
 <template>
   <form class="form-container" @submit.prevent="submitHandler">
-    <InputParent v-model="parentInputs"/>
+    <div class="parent-input">
+      <h4>Персональные данные</h4>
+      <InputParent v-model="parentInputs"/>
+    </div>
     <InputChildren  v-model="childrenInputs"/>
     <input type="submit" value="Добавить" />
   </form>
@@ -17,28 +20,27 @@ import useFamilyStore, { Parent, Child } from "../store/FamilyStore";
 // Объект родителя с заранее заданным id
 const childrenInputs = ref<Child[]>([]);
 const parentInputs = ref<Parent>({
-  name: '' as string,
-  age: null as number | null,
+  name: '',
+  age: undefined,
   id: Date.now(),
 });
 
 // обработка сабмита обеих форм, работа с store
-// Присваивание родительского ИД детям
-// очистка форм
 const familyStore = useFamilyStore();
 const submitHandler = () => {
-  const parent = { ...parentInputs.value };
+  // Трим имен, присваивание родительского ИД детям
+  const parent = { ...parentInputs.value, name: parentInputs.value.name.trim() };
   const children = [...childrenInputs.value]
-    .map((child) => ({ ...child, parentId: parent.id }));
+    .map((child) => ({ ...child, name: child.name.trim(), parentId: parent.id }));
+  // собсна сабмит методом из стора
   familyStore.addFamily(parent, children);
+  // очистка форм
   parentInputs.value = {
     name: '',
-    age: null,
+    age: undefined,
     id: Date.now(),
   };
   childrenInputs.value = [];
-  console.log('parents', familyStore.getParents);
-  console.log('children', familyStore.getChildren);
 };
 
 </script>

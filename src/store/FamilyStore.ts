@@ -2,15 +2,15 @@ import { defineStore } from 'pinia';
 
 export type Parent = {
     name: string,
-    age: number | null,
-    id: number,
+    age?: number,
+    id?: number,
 }
 
 export type Child = {
     name: string,
-    age: number | null,
-    parentId: number | undefined,
-    id: number,
+    age?: number,
+    parentId?: number,
+    id?: number,
 }
 
 const useFamilyStore = defineStore({
