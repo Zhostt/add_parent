@@ -1,8 +1,20 @@
 # add_parent
 
+# add_parent
+
+Have you ever wanted to make a list of single-parent families? 
+Here your dreams come true!
+
+## Link to deploy
+```
+https://add-parent.vercel.app/
+	
+```
+
 ## Project setup
 ```
 npm install
+	
 ```
 
 ### Compiles and hot-reloads for development

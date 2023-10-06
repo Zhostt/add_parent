@@ -7,7 +7,7 @@
         :class="{ btn: true, 'btn-primary':true, 'btn-add-child': true, inactive: addFormInactive }"
         @click="addForm"
       >
-        + Добавить ребенка
+        +
       </button>
     </div>
 

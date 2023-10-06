@@ -48,7 +48,7 @@ const submitHandler = () => {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: 20px;
+  font-size: 1em;
 
 }
 .input-container {
@@ -73,7 +73,6 @@ label{
 
 input{
   height: 3em;
-  margin: 0.5em 1em;
   border: 1px solid rgb(230, 226, 226);
   border-radius: 1em;
   box-sizing: border-box;
@@ -85,7 +84,6 @@ input{
 .input-label{
   color: grey;
   text-align: start;
-  margin: 0.5em 1em;
   width:100%;
 }
 
@@ -96,7 +94,7 @@ input{
   background-color: #01A7FD;
   color: white;
   height: 3em;
-  font-size: 20px;
+  font-size: 1em;
 }
 
 .btn-submit{
