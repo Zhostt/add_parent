@@ -48,6 +48,8 @@ const submitHandler = () => {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  font-size: 20px;
+
 }
 .input-container {
   display: flex;
@@ -58,42 +60,48 @@ const submitHandler = () => {
 
 .input-block{
   width: 100%;
-  border: 1px solid rgb(230, 226, 226);
   border-radius: 1em;
   margin-top: 1em;
   display: flex;
-  justify-content: space-between;
+  align-items: left;
+}
+
+label{
+  width: 100%;
+  margin: 1%;
 }
 
 input{
   height: 3em;
-  margin: 0.5em;
-  padding: 1em;
+  margin: 0.5em 1em;
   border: 1px solid rgb(230, 226, 226);
-  border-radius: 5px;
-}
-
-.input-block {
-  display: flex;
-  align-items: left;
+  border-radius: 1em;
+  box-sizing: border-box;
+  float: left;
+  width: 100%;
+  padding: 1em;
 }
 
 .input-label{
   color: grey;
   text-align: start;
-  margin: 0.5em 0.5em;
+  margin: 0.5em 1em;
+  width:100%;
 }
 
 .btn{
   height: 100%;
-  border: 1px solid #01A7FD;
+  border: 3px solid #01A7FD;
   border-radius: 1.5em;
   background-color: #01A7FD;
   color: white;
+  height: 3em;
+  font-size: 20px;
 }
 
 .btn-submit{
   background-color: 0;
-  width: 20%
+  width: 9vw;
+  margin: 1em 0;
 }
 </style>

@@ -16,9 +16,9 @@
         <div class="input-label">Имя</div>
         <input type="text" name="name" required v-model="input.name" autocomplete="off">
       </label>
-      <label for="children">
+      <label for="age">
         <div class="input-label">Возраст</div>
-        <input type="number" name="children" required v-model="input.age" autocomplete="off">
+        <input type="number" name="age" required v-model="input.age" autocomplete="off">
       </label>
       <button
         class="btn btn-danger delete-form-btn"
@@ -61,11 +61,11 @@ const addForm = () => {
       name: '', age: undefined, id, parentId: undefined,
     };
     childrenInputs.value.push(newInput);
-    if (childrenInputs.value.length === 5) {
-      addFormInactive.value = true;
-    }
-  } else {
+  }
+  if (childrenInputs.value.length >= 5) {
     addFormInactive.value = true;
+  } else {
+    addFormInactive.value = false;
   }
 };
 
@@ -78,9 +78,6 @@ const handleDelete = (id: number) => {
 
 <style scoped>
 
-.inactive {
-  background-color: grey;
-}
 .child-form-block{
   display: flex;
   align-items: center;
@@ -91,15 +88,26 @@ const handleDelete = (id: number) => {
   justify-content: space-between;
   margin-top: 3em;
   align-items: center;
+  width: 100%;
 }
 
 .btn-add-child{
-  width: 35%;
+  width: 11vw;
+  color: #01A7FD;
+  background-color: white;
+  height: 3em;
+}
+
+.inactive {
+  color: grey;
+  border: 1px solid grey;
 }
 
 .delete-form-btn{
-  margin: 0.5em;
-  height: 3em;
-  align-self: flex-end;
+  margin: 0.5em 1.5em;
+  align-self: self-end;
+  background-color: white;
+  color: #01A7FD;
+  border: 0;
 }
 </style>
