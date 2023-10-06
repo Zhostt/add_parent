@@ -8,13 +8,11 @@ Here your dreams come true!
 ## Link to deploy
 ```
 https://add-parent.vercel.app/
-	
 ```
 
 ## Project setup
 ```
 npm install
-	
 ```
 
 ### Compiles and hot-reloads for development
