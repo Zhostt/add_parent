@@ -3,7 +3,7 @@
 Have you ever wanted to make a list of single-parent families? 
 Here your dreams come true!
 
-PS: just dont lool at that through mobile devices. You have been warned.
+PS: just dont look at that through mobile devices. You have been warned.
 
 ## Link to deploy
 ```
